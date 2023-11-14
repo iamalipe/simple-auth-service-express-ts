@@ -6,7 +6,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iamalipe/chat-app-express-mongo-ts.git"
+    "url": "https://github.com/iamalipe/simple-auth-service-express-ts.git"
   },
   "description": "A Simple Authentication and Authorization service build using Express, TS, Prisma",
   "homepage": "https://abhiseck.vercel.app/",
@@ -26,6 +26,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {

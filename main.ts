@@ -3,6 +3,10 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 
+import authRoutes from "./routes/authRoutes";
+import { authenticate, authorize } from "./middlewares";
+import { UserRole } from "@prisma/client";
+
 const EXPRESS_PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -17,12 +21,24 @@ app.use(cors());
 //   })
 // );
 
+app.use("/auth", authRoutes);
+
 app.get("/", async (req, res) => {
   res.send("Hello World, simple-auth-service-express-ts");
 });
 
 app.get("/ping", async (req, res) => {
   res.send("pong!");
+});
+
+app.get("/protected", authenticate, authorize(), (req, res) => {
+  // Access jwtPayload in the response
+  const { jwtPayload } = req;
+  if (jwtPayload) {
+    // Use jwtPayload.userId, jwtPayload.role, etc.
+  }
+
+  res.send("This is a protected route");
 });
 
 app.listen(EXPRESS_PORT, () => {
