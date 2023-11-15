@@ -1,3 +1,5 @@
+// main.ts
+
 import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
@@ -32,12 +34,6 @@ app.get("/ping", async (req, res) => {
 });
 
 app.get("/protected", authenticate, authorize(), (req, res) => {
-  // Access jwtPayload in the response
-  const { jwtPayload } = req;
-  if (jwtPayload) {
-    // Use jwtPayload.userId, jwtPayload.role, etc.
-  }
-
   res.send("This is a protected route");
 });
 

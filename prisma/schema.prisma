@@ -14,14 +14,26 @@ enum UserRole {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  imageUrl  String   @default("")
-  email     String   @unique
-  username  String   @unique
+  imageUrl  String       @default("")
+  email     String       @unique
+  username  String       @unique
   password  String
-  role      UserRole @default(DEFAULT)
-  lastLogin DateTime @default(now())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      UserRole     @default(DEFAULT)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  devices   DeviceInfo[]
+}
+
+model DeviceInfo {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  refreshToken String @db.String
+  ip           String @db.String
+  lastLogin    String @db.String
+  UserId       String @db.ObjectId
+  user         User   @relation(fields: [UserId], references: [id], onDelete: Cascade)
+
+  @@index([UserId])
 }
