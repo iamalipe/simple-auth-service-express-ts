@@ -5,9 +5,9 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 
-import authRoutes from "./routes/authRoutes";
 import { authenticate, authorize } from "./middlewares";
 import { UserRole } from "@prisma/client";
+import { authRouter } from "./auth";
 
 const EXPRESS_PORT = process.env.PORT || 3000;
 
@@ -23,7 +23,7 @@ app.use(cors());
 //   })
 // );
 
-app.use("/auth", authRoutes);
+app.use("/auth", authRouter);
 
 app.get("/", async (req, res) => {
   res.send("Hello World, simple-auth-service-express-ts");
